@@ -1,10 +1,4 @@
-import images from "./images";
-
 const data = {
-  user: {
-    name: "ggenilsonaraujo",
-    img: images.avt,
-  },
   summary: [
     {
       title: "Sales",

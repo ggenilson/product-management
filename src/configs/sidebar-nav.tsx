@@ -1,39 +1,15 @@
 const sidebarNav = [
   {
-    link: "/",
-    section: "home",
+    link: "/dashboard",
+    section: "dashboard",
     icon: <i className="bx bx-home-alt" />,
-    text: "Home",
+    text: "Dashboard",
   },
   {
-    link: "/orders",
-    section: "orders",
-    icon: <i className="bx bx-receipt" />,
-    text: "Orders",
-  },
-  {
-    link: "/products",
+    link: "/dashboard/products",
     section: "products",
     icon: <i className="bx bx-cube" />,
     text: "Products",
-  },
-  {
-    link: "/customers",
-    section: "customers",
-    icon: <i className="bx bx-user" />,
-    text: "Customers",
-  },
-  {
-    link: "/stats",
-    section: "stats",
-    icon: <i className="bx bx-line-chart" />,
-    text: "Stats",
-  },
-  {
-    link: "/settings",
-    section: "settings",
-    icon: <i className="bx bx-cog" />,
-    text: "Settings",
   },
 ];
 

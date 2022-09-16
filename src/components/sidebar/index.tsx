@@ -9,13 +9,19 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const [, currentPath] = window.location.pathname.split("/");
+    const routes = window.location.pathname.split("/");
 
-    const activeItem = sidebarNav.findIndex(
-      (item) => item.section === currentPath
-    );
+    const routesLength = routes.length;
 
-    setActiveIndex(!currentPath.length ? 0 : activeItem);
+    if (routesLength) {
+      const currentPath = routes[routesLength - 1];
+
+      const activeItem = sidebarNav.findIndex(
+        (item) => item.section === currentPath
+      );
+
+      setActiveIndex(!currentPath ? 0 : activeItem);
+    }
   }, [location]);
 
   const closeSidebar = () => {
