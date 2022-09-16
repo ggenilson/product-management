@@ -4,7 +4,11 @@ import sidebarNav from "../../configs/sidebar-nav";
 import { images } from "../../constants";
 import "./style.scss";
 
-const Sidebar: React.FC = () => {
+type SidebarProps = {
+  onCloseSidebar: () => void;
+};
+
+const Sidebar: React.FC<SidebarProps> = ({ onCloseSidebar }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const location = useLocation();
 
@@ -24,20 +28,11 @@ const Sidebar: React.FC = () => {
     }
   }, [location]);
 
-  const closeSidebar = () => {
-    // document.querySelector(".main__content").style.transform =
-    //   "scale(1) translateX(0)";
-    // setTimeout(() => {
-    //   document.body.classList.remove("sidebar-open");
-    //   document.querySelector(".main__content").style = "";
-    // }, 500);
-  };
-
   return (
     <div className="sidebar">
       <div className="sidebar__logo">
         <img src={images.logo} alt="" />
-        <div className="sidebar-close" onClick={closeSidebar}>
+        <div className="sidebar-close" onClick={onCloseSidebar}>
           <i className="bx bx-x"></i>
         </div>
       </div>
@@ -49,7 +44,7 @@ const Sidebar: React.FC = () => {
             className={`sidebar__menu__item ${
               activeIndex === index && "active"
             }`}
-            onClick={closeSidebar}
+            onClick={onCloseSidebar}
           >
             <div className="sidebar__menu__item__icon">{nav.icon}</div>
             <div className="sidebar__menu__item__txt">{nav.text}</div>

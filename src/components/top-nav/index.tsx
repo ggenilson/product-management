@@ -2,15 +2,15 @@ import React from "react";
 import UserInfo from "../user-info";
 import "./style.scss";
 
-const TopNav: React.FC = () => {
-  const openSidebar = () => {
-    document.body.classList.add("sidebar-open");
-  };
+type TopNavProps = {
+  onOpenSidebar: () => void;
+};
 
+const TopNav: React.FC<TopNavProps> = ({ onOpenSidebar }) => {
   return (
     <div className="topnav">
       <UserInfo />
-      <div className="sidebar-toggle" onClick={openSidebar}>
+      <div className="sidebar-toggle" onClick={onOpenSidebar}>
         <i className="bx bx-menu-alt-right" />
       </div>
     </div>
