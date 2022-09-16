@@ -38,6 +38,10 @@ const ProductForm: React.FC<ProductFormProps> = ({
           message: "Product saved",
           color: "green",
         });
+
+        form.reset();
+
+        setOpenModal(false);
       }
     } catch (err) {
       showNotification({
