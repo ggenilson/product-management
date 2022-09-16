@@ -70,7 +70,7 @@
         color: $mainColor;
 
         @include tablet {
-          color: $orange;
+          color: $mainColor;
         }
       }
 
@@ -79,7 +79,7 @@
         color: $mainColor;
 
         @include tablet {
-          color: $orange;
+          color: $mainColor;
         }
 
         &::before {
@@ -94,7 +94,7 @@
           border-bottom-right-radius: 20px;
 
           @include tablet {
-            background-color: $orange;
+            background-color: $mainColor;
           }
         }
       }
