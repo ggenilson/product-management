@@ -1,5 +1,22 @@
 @use "../../scss/abstracts/" as *;
 
+.btn-add {
+  @include flex(center, center);
+
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+  background-color: $mainColor;
+  color: $white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout";
 import Blank from "./pages/Blank";
 import Dashboard from "./pages/Dashboard";
+import Product from "./pages/Product";
 import "./scss/App.scss";
 
 const App: React.FC = () => {
@@ -17,7 +18,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Blank />} />
             <Route path="/dashboard" element={<MainLayout />}>
               <Route index element={<Dashboard />} />
-              <Route path="products" element={<Blank />} />
+              <Route path="products" element={<Product />} />
             </Route>
           </Routes>
         </BrowserRouter>
