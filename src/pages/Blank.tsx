@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Table, { TableColumnProps } from "../components/table";
+import ProductForm from "../shared/product-form";
 
 type ExampleProps = {
   name: string;
@@ -18,8 +19,12 @@ const Blank: React.FC = () => {
     },
   ];
 
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <>
+      <ProductForm {...{ openModal, setOpenModal }} />
+
       <Table
         columns={columns}
         data={[
@@ -28,7 +33,7 @@ const Blank: React.FC = () => {
           { name: "Frederico Pascoal", age: 50 },
         ]}
         loading={false}
-        onDeleteClick={() => alert("Teste")}
+        onDeleteClick={() => setOpenModal(true)}
       />
     </>
   );
