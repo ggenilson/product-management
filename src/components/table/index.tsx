@@ -12,6 +12,8 @@ interface TableProps<T> {
   columns: TableColumnProps<T>[];
   loading?: boolean;
   onRowClick?: (row: T) => void;
+  onDeleteClick?: (row: T) => void;
+  onDetailsClick?: (row: T) => void;
 }
 
 const Table: <T>(p: TableProps<T>) => React.ReactElement<T> = ({
@@ -19,6 +21,8 @@ const Table: <T>(p: TableProps<T>) => React.ReactElement<T> = ({
   data,
   loading,
   onRowClick,
+  onDeleteClick,
+  onDetailsClick,
 }) => {
   return (
     <table className="table">
@@ -27,6 +31,8 @@ const Table: <T>(p: TableProps<T>) => React.ReactElement<T> = ({
           {columns.map((column, index) => (
             <th key={index}>{column.label}</th>
           ))}
+          {onDeleteClick ? <th>Delete</th> : null}
+          {onDetailsClick ? <th>Details</th> : null}
         </tr>
       </thead>
       <tbody>
@@ -45,6 +51,25 @@ const Table: <T>(p: TableProps<T>) => React.ReactElement<T> = ({
                     : (row as any)[value]}
                 </td>
               ))}
+              {onDeleteClick ? (
+                <td
+                  data-label="Delete"
+                  className="delete"
+                  onClick={() => onDeleteClick(row)}
+                >
+                  <i className="bx bx-trash" />
+                </td>
+              ) : null}
+
+              {onDetailsClick ? (
+                <td
+                  data-label="Delete"
+                  className="details"
+                  onClick={() => onDetailsClick(row)}
+                >
+                  <i className="bx bx-file" />
+                </td>
+              ) : null}
             </tr>
           ))) ||
           null}

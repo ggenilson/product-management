@@ -4,6 +4,21 @@
   width: 100%;
   border-collapse: collapse;
 
+  i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 2px;
+    transition: all 0.3s ease-in-out;
+
+    &.bx-trash {
+      color: $red;
+    }
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
   @include mobile {
     display: block;
     width: 100%;

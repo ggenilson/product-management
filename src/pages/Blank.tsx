@@ -22,14 +22,13 @@ const Blank: React.FC = () => {
     <>
       <Table
         columns={columns}
-        data={
-          [
-            // { name: "Genilson Araújo", age: 20 },
-            // { name: "Ednilson Araújo", age: 21 },
-            // { name: "Frederico Pascoal", age: 50 },
-          ]
-        }
+        data={[
+          { name: "Genilson Araújo", age: 20 },
+          { name: "Ednilson Araújo", age: 21 },
+          { name: "Frederico Pascoal", age: 50 },
+        ]}
         loading={false}
+        onDeleteClick={() => alert("Teste")}
       />
     </>
   );
