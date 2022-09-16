@@ -1,5 +1,6 @@
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { NotificationsProvider } from "@mantine/notifications";
 import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,15 +14,17 @@ const App: React.FC = () => {
   return (
     <MantineProvider>
       <ModalsProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Blank />} />
-            <Route path="/dashboard" element={<MainLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="products" element={<Product />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <NotificationsProvider position="top-right">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Blank />} />
+              <Route path="/dashboard" element={<MainLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="products" element={<Product />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>
   );

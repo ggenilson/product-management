@@ -1,5 +1,14 @@
-import { Button, Modal, NumberInput, TextInput } from "@mantine/core";
+import { Button, Modal, NumberInput, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
+import api from "../services/api";
+
+export type ProductProps = {
+  name: string;
+  value: number;
+  group: string;
+  description: string;
+};
 
 type ProductFormProps = {
   openModal: boolean;
@@ -11,13 +20,32 @@ const ProductForm: React.FC<ProductFormProps> = ({
   setOpenModal,
 }) => {
   const form = useForm({
-    initialValues: { name: "", value: 0, group: "" },
+    initialValues: { name: "", value: 0, group: "", description: "" },
 
     validate: {
       name: (value) => (!value.length ? "required *" : null),
       group: (value) => (!value.length ? "required *" : null),
+      description: (value) => (!value.length ? "required *" : null),
     },
   });
+
+  const handleOnSubmit = async (values: typeof form.values) => {
+    try {
+      const product = await api.post("/products", values);
+
+      if (product.data) {
+        showNotification({
+          message: "Product saved",
+          color: "green",
+        });
+      }
+    } catch (err) {
+      showNotification({
+        message: "Something went wrong while saving the product",
+        color: "red",
+      });
+    }
+  };
 
   return (
     <Modal
@@ -26,7 +54,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       size="lg"
       title="Add new product"
     >
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput
           label="Name"
           placeholder="Name"
@@ -44,6 +72,12 @@ const ProductForm: React.FC<ProductFormProps> = ({
           label="Group"
           placeholder="Group"
           {...form.getInputProps("group")}
+        />
+        <Textarea
+          mt="sm"
+          label="Description"
+          placeholder="Description"
+          {...form.getInputProps("description")}
         />
 
         <Button type="submit" mt="sm" className="add">
