@@ -55,7 +55,9 @@ const Table: <T>(p: TableProps<T>) => React.ReactElement<T> = ({
         )}
         {loading ? (
           <tr>
-            <h1>Loading ...</h1>
+            <td colSpan={100}>
+              <h3>Loading ...</h3>
+            </td>
           </tr>
         ) : null}
       </tbody>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import sidebarNav from "../../configs/sidebar-nav";
-import { images } from "../../constants";
 import "./style.scss";
 
 type SidebarProps = {
@@ -31,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseSidebar }) => {
   return (
     <div className="sidebar">
       <div className="sidebar__logo">
-        <img src={images.logo} alt="" />
+        <h2 className="sidebar__title">Manager</h2>
         <div className="sidebar-close" onClick={onCloseSidebar}>
           <i className="bx bx-x" />
         </div>

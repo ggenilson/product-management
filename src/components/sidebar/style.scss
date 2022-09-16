@@ -30,10 +30,8 @@
       margin-bottom: $mobileSpacing;
     }
 
-    img {
-      --size: 55px;
-      width: var(--size);
-      height: var(--size);
+    h2 {
+      color: $mainColor;
     }
 
     .sidebar-close {
