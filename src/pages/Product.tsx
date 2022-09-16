@@ -1,25 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table, { TableColumnProps } from "../components/table";
-import ProductForm from "../shared/product-form";
-
-type ExampleProps = {
-  name: string;
-  age: number;
-};
+import api from "../services/api";
+import ProductForm, { ProductProps } from "../shared/product-form";
 
 const Product: React.FC = () => {
-  const columns: TableColumnProps<ExampleProps>[] = [
+  const [products, setProducts] = useState<ProductProps[]>([]);
+
+  const [loading, setLoading] = useState(false);
+
+  const getProducts = async () => {
+    setLoading(true);
+
+    const products = await api.get("/products");
+
+    if (products.data) {
+      setProducts(products.data);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const columns: TableColumnProps<ProductProps>[] = [
     {
       label: "Name",
       value: "name",
     },
     {
-      label: "Price",
-      value: "age",
+      label: "Value",
+      value: "value",
+    },
+    {
+      label: "Group",
+      value: "group",
     },
   ];
-
-  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
@@ -27,12 +47,8 @@ const Product: React.FC = () => {
 
       <Table
         columns={columns}
-        data={[
-          { name: "Genilson Araújo", age: 20 },
-          { name: "Ednilson Araújo", age: 21 },
-          { name: "Frederico Pascoal", age: 50 },
-        ]}
-        loading={false}
+        data={products}
+        loading={loading}
         onAddClick={() => setOpenModal(true)}
       />
     </>
