@@ -1,6 +1,7 @@
 import { showNotification } from "@mantine/notifications";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Table, { TableColumnProps } from "../components/table";
+import { AuthUserContext } from "../contexts";
 import api from "../services/api";
 import UserForm, { UserProps } from "../shared/user-form";
 
@@ -8,6 +9,7 @@ const User: React.FC = () => {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { userData } = useContext(AuthUserContext);
 
   const removeUser = async (id: string) => {
     try {
@@ -31,7 +33,11 @@ const User: React.FC = () => {
       const users = await api.get("/users");
 
       if (users.data) {
-        setUsers(users.data);
+        const newUserList = users.data.filter(
+          (user: UserProps) => user.id !== userData?.user.id
+        );
+
+        setUsers(newUserList);
       }
     } catch (err) {
       setLoading(false);

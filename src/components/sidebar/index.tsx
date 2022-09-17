@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseSidebar }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("user-info");
+    localStorage.removeItem("product-management-user-data");
 
     navigate("/login");
   };
