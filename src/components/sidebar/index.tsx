@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import sidebarNav from "../../configs/sidebar-nav";
 import "./style.scss";
 
@@ -27,6 +27,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseSidebar }) => {
     }
   }, [location]);
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user-info");
+
+    navigate("/login");
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__logo">
@@ -53,7 +61,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseSidebar }) => {
           <div className="sidebar__menu__item__icon">
             <i className="bx bx-log-out" />
           </div>
-          <div className="sidebar__menu__item__txt">Logout</div>
+          <div className="sidebar__menu__item__txt" onClick={handleLogout}>
+            Logout
+          </div>
         </div>
       </div>
     </div>
