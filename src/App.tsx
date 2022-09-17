@@ -22,8 +22,14 @@ const App: React.FC = () => {
             <BrowserRouter>
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<MainLayout />}>
-                  <Route index element={<Dashboard />} />
+                <Route
+                  path="/dashboard"
+                  element={<PrivateRoute Component={MainLayout} />}
+                >
+                  <Route
+                    index
+                    element={<PrivateRoute Component={Dashboard} />}
+                  />
                   <Route
                     path="products"
                     element={<PrivateRoute Component={Product} />}
