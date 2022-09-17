@@ -25,6 +25,11 @@ const Login: React.FC = () => {
       const user = await api.post("/users/authenticate", values);
 
       if (user.data) {
+        localStorage.setItem(
+          "product-management-user-data",
+          JSON.stringify(user.data)
+        );
+
         showNotification({
           message: "user logged",
           color: "green",
@@ -32,8 +37,6 @@ const Login: React.FC = () => {
 
         navigate("/dashboard");
       }
-
-      console.log(user);
     } catch (err) {
       showNotification({
         message: String(err) || "Something went wrong while saving the product",

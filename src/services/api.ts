@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("product-management-token");
+  const token = localStorage.getItem("product-management-user-data");
 
   config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
 
