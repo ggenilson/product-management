@@ -8,6 +8,7 @@ import MainLayout from "./components/layout";
 import Blank from "./pages/Blank";
 import Dashboard from "./pages/Dashboard";
 import Product from "./pages/Product";
+import User from "./pages/User";
 import "./scss/App.scss";
 
 const App: React.FC = () => {
@@ -21,6 +22,7 @@ const App: React.FC = () => {
               <Route path="/dashboard" element={<MainLayout />}>
                 <Route index element={<Dashboard />} />
                 <Route path="products" element={<Product />} />
+                <Route path="users" element={<User />} />
               </Route>
             </Routes>
           </BrowserRouter>

@@ -11,6 +11,12 @@ const sidebarNav = [
     icon: <i className="bx bx-cube" />,
     text: "Products",
   },
+  {
+    link: "/dashboard/users",
+    section: "users",
+    icon: <i className="bx bx-user" />,
+    text: "Users",
+  },
 ];
 
 export default sidebarNav;
