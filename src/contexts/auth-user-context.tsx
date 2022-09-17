@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { UserProps } from "../shared/user-form";
 
 interface Props {
@@ -25,6 +25,20 @@ export const AuthUserContext =
 
 const AuthUserProvider: React.FC<Props> = ({ children }) => {
   const [userData, setUserData] = useState<UserContextProps>();
+
+  useEffect(() => {
+    if (!userData) {
+      const localUserInfo = localStorage.getItem(
+        "product-management-user-data"
+      );
+
+      if (localUserInfo) {
+        const parsedLocalUserInfo = JSON.parse(localUserInfo);
+
+        setUser(parsedLocalUserInfo);
+      }
+    }
+  }, [userData]);
 
   const setUser = (user: UserContextProps) => setUserData(user);
 
