@@ -5,8 +5,8 @@ import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout";
-import Blank from "./pages/Blank";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 import Product from "./pages/Product";
 import User from "./pages/User";
 import "./scss/App.scss";
@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <NotificationsProvider position="top-right">
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Blank />} />
+              <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<MainLayout />}>
                 <Route index element={<Dashboard />} />
                 <Route path="products" element={<Product />} />
