@@ -1,4 +1,4 @@
-// import { showNotification } from "@mantine/notifications";
+import { showNotification } from "@mantine/notifications";
 import React, { useEffect, useState } from "react";
 import Table, { TableColumnProps } from "../components/table";
 import api from "../services/api";
@@ -9,20 +9,20 @@ const User: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const removeProduct = async (id: string) => {
-  //   try {
-  //     await api.delete(`/products/${id}`);
+  const removeUser = async (id: string) => {
+    try {
+      await api.delete(`/users/${id}`);
 
-  //     getProducts();
-  //   } catch (err) {
-  //     console.log(err);
+      getUsers();
+    } catch (err) {
+      console.log(err);
 
-  //     showNotification({
-  //       message: String(err) || "Something went wrong while saving the product",
-  //       color: "red",
-  //     });
-  //   }
-  // };
+      showNotification({
+        message: String(err) || "Something went wrong while saving the product",
+        color: "red",
+      });
+    }
+  };
 
   const getUsers = async () => {
     setLoading(true);
@@ -68,7 +68,7 @@ const User: React.FC = () => {
         data={users}
         loading={loading}
         onAddClick={() => setOpenModal(true)}
-        // onDeleteClick={(product) => removeProduct(product.id)}
+        onDeleteClick={(user) => removeUser(user.id)}
       />
     </>
   );
