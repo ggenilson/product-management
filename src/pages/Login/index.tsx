@@ -1,6 +1,7 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
+import api from "../../services/api";
 import "./style.scss";
 
 const Login: React.FC = () => {
@@ -14,9 +15,16 @@ const Login: React.FC = () => {
       password: (value) => (!value.length ? "required *" : null),
     },
   });
+
+  const login = async (values: typeof form.values) => {
+    const user = await api.post("/users/authenticate", values);
+
+    console.log(user);
+  };
+
   return (
     <div className="login_container">
-      <form onSubmit={form.onSubmit((values) => console.log("Values"))}>
+      <form onSubmit={form.onSubmit((values) => login(values))}>
         <TextInput
           label="Email"
           placeholder="Email"
@@ -30,7 +38,7 @@ const Login: React.FC = () => {
         />
 
         <Group position="center" mt="xl">
-          <Button variant="outline" onClick={() => console.log("Log in")}>
+          <Button type="submit" variant="outline">
             Log In
           </Button>
         </Group>
