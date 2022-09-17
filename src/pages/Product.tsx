@@ -1,3 +1,4 @@
+import { Modal } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import React, { useEffect, useState } from "react";
 import Table, { TableColumnProps } from "../components/table";
@@ -6,7 +7,9 @@ import ProductForm, { ProductProps } from "../shared/product-form";
 
 const Product: React.FC = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
-
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalDetails, setOpenModalDetails] = useState(false);
+  const [modalDescription, setModalDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
   const removeProduct = async (id: string) => {
@@ -16,6 +19,7 @@ const Product: React.FC = () => {
       getProducts();
     } catch (err) {
       console.log(err);
+
       showNotification({
         message: String(err) || "Something went wrong while saving the product",
         color: "red",
@@ -43,8 +47,6 @@ const Product: React.FC = () => {
     getProducts();
   }, []);
 
-  const [openModal, setOpenModal] = useState(false);
-
   const columns: TableColumnProps<ProductProps>[] = [
     {
       label: "Name",
@@ -64,12 +66,26 @@ const Product: React.FC = () => {
     <>
       <ProductForm {...{ openModal, setOpenModal }} onAdd={getProducts} />
 
+      <Modal
+        opened={openModalDetails}
+        onClose={() => setOpenModalDetails(false)}
+        size="lg"
+        title="Details"
+      >
+        <h4>Description: </h4>
+        {modalDescription}
+      </Modal>
+
       <Table
         columns={columns}
         data={products}
         loading={loading}
         onAddClick={() => setOpenModal(true)}
-        onDeleteClick={async (row) => await removeProduct(row.id)}
+        onDeleteClick={(product) => removeProduct(product.id)}
+        onDetailsClick={(product) => {
+          setModalDescription(product.description);
+          setOpenModalDetails(true);
+        }}
       />
     </>
   );
