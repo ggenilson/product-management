@@ -4,6 +4,7 @@ import { showNotification } from "@mantine/notifications";
 import api from "../services/api";
 
 export type ProductProps = {
+  id: string;
   name: string;
   value: number;
   group: string;
@@ -49,7 +50,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       }
     } catch (err) {
       showNotification({
-        message: "Something went wrong while saving the product",
+        message: String(err) || "Something went wrong while saving the product",
         color: "red",
       });
     }
