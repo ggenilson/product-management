@@ -11,10 +11,14 @@ const Product: React.FC = () => {
   const getProducts = async () => {
     setLoading(true);
 
-    const products = await api.get("/products");
+    try {
+      const products = await api.get("/products");
 
-    if (products.data) {
-      setProducts(products.data);
+      if (products.data) {
+        setProducts(products.data);
+      }
+    } catch (err) {
+      setLoading(false);
     }
 
     setLoading(false);
@@ -43,7 +47,7 @@ const Product: React.FC = () => {
 
   return (
     <>
-      <ProductForm {...{ openModal, setOpenModal }} />
+      <ProductForm {...{ openModal, setOpenModal }} onAdd={getProducts} />
 
       <Table
         columns={columns}

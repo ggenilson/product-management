@@ -13,11 +13,13 @@ export type ProductProps = {
 type ProductFormProps = {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
+  onAdd: () => void;
 };
 
 const ProductForm: React.FC<ProductFormProps> = ({
   openModal,
   setOpenModal,
+  onAdd,
 }) => {
   const form = useForm({
     initialValues: { name: "", value: 0, group: "", description: "" },
@@ -38,6 +40,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
           message: "Product saved",
           color: "green",
         });
+
+        onAdd();
 
         form.reset();
 
