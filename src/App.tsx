@@ -5,6 +5,7 @@ import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout";
+import AuthUserProvider from "./contexts/auth-user-context";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
@@ -16,16 +17,18 @@ const App: React.FC = () => {
     <MantineProvider>
       <ModalsProvider>
         <NotificationsProvider position="top-right">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/dashboard" element={<MainLayout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="products" element={<Product />} />
-                <Route path="users" element={<User />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <AuthUserProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/dashboard" element={<MainLayout />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="products" element={<Product />} />
+                  <Route path="users" element={<User />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </AuthUserProvider>
         </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>

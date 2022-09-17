@@ -1,8 +1,9 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthUserContext } from "../../contexts";
 import api from "../../services/api";
 import "./style.scss";
 
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
   });
 
   const navigate = useNavigate();
+  const { setUserData } = useContext(AuthUserContext);
 
   const login = async (values: typeof form.values) => {
     try {
@@ -29,6 +31,8 @@ const Login: React.FC = () => {
           "product-management-user-data",
           JSON.stringify(user.data)
         );
+
+        setUserData(user.data);
 
         showNotification({
           message: "user logged",
