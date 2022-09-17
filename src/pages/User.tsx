@@ -24,14 +24,14 @@ const User: React.FC = () => {
   //   }
   // };
 
-  const getProducts = async () => {
+  const getUsers = async () => {
     setLoading(true);
 
     try {
-      const products = await api.get("/products");
+      const users = await api.get("/users");
 
-      if (products.data) {
-        setUsers(products.data);
+      if (users.data) {
+        setUsers(users.data);
       }
     } catch (err) {
       setLoading(false);
@@ -41,7 +41,7 @@ const User: React.FC = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    getUsers();
   }, []);
 
   const columns: TableColumnProps<UserProps>[] = [
@@ -61,7 +61,7 @@ const User: React.FC = () => {
 
   return (
     <>
-      <UserForm {...{ openModal, setOpenModal }} onAdd={getProducts} />
+      <UserForm {...{ openModal, setOpenModal }} onAdd={getUsers} />
 
       <Table
         columns={columns}
