@@ -1,6 +1,8 @@
 import { Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./style.scss";
 
@@ -11,15 +13,33 @@ const Login: React.FC = () => {
       password: "",
     },
     validate: {
-      email: (value) => (!value.length ? "required *" : null),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "invalid email"),
       password: (value) => (!value.length ? "required *" : null),
     },
   });
 
-  const login = async (values: typeof form.values) => {
-    const user = await api.post("/users/authenticate", values);
+  const navigate = useNavigate();
 
-    console.log(user);
+  const login = async (values: typeof form.values) => {
+    try {
+      const user = await api.post("/users/authenticate", values);
+
+      if (user.data) {
+        showNotification({
+          message: "user logged",
+          color: "green",
+        });
+
+        navigate("/dashboard");
+      }
+
+      console.log(user);
+    } catch (err) {
+      showNotification({
+        message: String(err) || "Something went wrong while saving the product",
+        color: "red",
+      });
+    }
   };
 
   return (
