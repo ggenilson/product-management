@@ -38,7 +38,7 @@ const AuthUserProvider: React.FC<Props> = ({ children }) => {
         setUser(parsedLocalUserInfo);
       }
     }
-  }, [userData]);
+  }, []);
 
   const setUser = (user: UserContextProps) => setUserData(user);
 

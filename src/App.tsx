@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
 import User from "./pages/User";
+import PrivateRoute from "./routes/private-route";
 import "./scss/App.scss";
 
 const App: React.FC = () => {
@@ -20,11 +21,17 @@ const App: React.FC = () => {
           <AuthUserProvider>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<MainLayout />}>
                   <Route index element={<Dashboard />} />
-                  <Route path="products" element={<Product />} />
-                  <Route path="users" element={<User />} />
+                  <Route
+                    path="products"
+                    element={<PrivateRoute Component={Product} />}
+                  />
+                  <Route
+                    path="users"
+                    element={<PrivateRoute Component={User} />}
+                  />
                 </Route>
               </Routes>
             </BrowserRouter>
